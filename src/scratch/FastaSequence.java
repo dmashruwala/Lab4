@@ -58,7 +58,7 @@ public class FastaSequence {
 				List<String> header = new ArrayList<String>();
 				List<String> sequence = new ArrayList<String>();
 				
-				StringBuilder build = new StringBuilder();
+				StringBuilder builder = new StringBuilder();
 				boolean bool = true;
 		        
 		            for(String line = fasta.readLine().trim(); line != null; line = fasta.readLine()) {
@@ -66,22 +66,22 @@ public class FastaSequence {
 		                    if (bool) {
 		                        bool = false;
 		                   } else {
-		                    	sequence.add(build.toString());
-		                    	build.delete(0, build.length());
+		                    	sequence.add(builder.toString());
+		                    	builder.delete(0, builder.length());
 		                    }
 		                    header.add(line.substring(1));
 		                }else {		                
-		                	build.append(line);
+		                	builder.append(line);
 		                }
 		            }
-		    	sequence.add(build.toString());
-		    	build.delete(0, build.length());
+		    	sequence.add(builder.toString());
+		    	builder.delete(0, builder.length());
 		    	
 		    	fasta.close();
 		    	
 		    	for(int i = 0; i < header.size(); i++){
-		    		FastaSequence temp = new FastaSequence(header.get(i), sequence.get(i));
-		    		fastaList.add(temp);
+		    		FastaSequence seq = new FastaSequence(header.get(i), sequence.get(i));
+		    		fastaList.add(seq);
 		    	}
 		    	return fastaList;
 			}
